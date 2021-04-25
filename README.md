@@ -23,6 +23,7 @@ type Info = (Cell, Wave)
 
 isSudoku :: Sudoku -> Bool
 isFull :: Sudoku -> Bool
+fromString :: String -> Sudoku
 getRows :: Sudoku -> [Block]
 getColumns :: Sudoku -> [Block]
 getBoxes :: Sudoku -> [Block]
