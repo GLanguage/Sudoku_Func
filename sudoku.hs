@@ -9,6 +9,7 @@ module Sudoku
         Info,
         isSudoku,
         isFull,
+        fromString,
         getRows,
         getColumns,
         getBoxes,
@@ -22,6 +23,7 @@ where
 
 import Data.List (transpose, (\\), sortOn)
 import Data.Maybe (fromJust, isNothing)
+import Data.Char (isSpace, digitToInt)
 
 type Matrix a = [[a]]
 
@@ -46,6 +48,13 @@ instance Show Sudoku where
     show = concatMap (foldr ((:) . printCell) "\n") . cells where
         printCell Nothing = '.'
         printCell (Just n) = head (show n)
+
+fromString :: String -> Sudoku
+fromString = Sudoku . map (map char2cell) . chop9 . filter (not . isSpace) where
+    chop9 [] = []
+    chop9 l = take 9 l : (chop9 . drop 9 $ l)
+    char2cell '.' = Nothing 
+    char2cell c = Just $ digitToInt c
 
 type Block = [Cell]
 
