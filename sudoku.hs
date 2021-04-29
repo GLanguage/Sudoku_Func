@@ -17,6 +17,7 @@ module Sudoku
         binded,
         getBlanks,
         conflict,
+        replace,
         solve
     )
 where
@@ -97,7 +98,7 @@ getBlanks :: Sudoku -> [(Pos, Info)]
 getBlanks = sortOn (length . snd . snd) . filter (isNothing . fst . snd) . binded
 
 conflict :: Sudoku -> Bool
-conflict = not . any (null . snd . snd) . binded
+conflict = any (null . snd . snd) . getBlanks
 
 replace :: Sudoku -> Pos -> Cell -> Sudoku
 replace (Sudoku s) (x, y) c = Sudoku (take (x - 1) s ++ (take (y - 1) row ++ c : drop y row) : drop x s) where

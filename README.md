@@ -31,5 +31,6 @@ getWaves :: Sudoku -> Matrix Wave
 binded :: Sudoku -> [(Pos, Info)]
 getBlanks :: Sudoku -> [(Pos, Info)]
 conflict :: Sudoku -> Bool
+replace :: Sudoku -> Pos -> Cell -> Sudoku
 solve :: Sudoku -> [Sudoku]
 ```
